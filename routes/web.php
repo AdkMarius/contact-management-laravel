@@ -26,16 +26,12 @@ Route::prefix('/contact')->name('contact.')->controller(ContactController::class
 
     Route::post('/list', 'search')->name('search');
 
-    Route::get('/view/{id}', 'read')->where([
-        'id' => '[0-9]'
-    ])->name('view');
+    Route::get('/view/{id}', 'read')->name('view');
 
-    Route::get('update/{id}', 'update')->where([
-        'id' => '[0-9]'
-    ])->name('update');
+    Route::get('update/{id}', 'edit')->name('update');
 
-    Route::get('/delete/{id}', 'delete')->name('')->where([
-        'id' => '[0-9]'
-    ])->name('delete');
+    Route::patch('update/{id}', 'update');
+
+    Route::get('/delete/{id}', 'delete')->name('delete');
 
 });

@@ -1,8 +1,8 @@
 @extends('layout')
 
-@section('title', 'Ajouter un contact')
+@section('title', 'Modifier un article')
 
-@section('description', 'Ajouter des contacts à votre liste')
+@section('description', 'Modification d\'un article')
 
 @section('header')
     @include('header')

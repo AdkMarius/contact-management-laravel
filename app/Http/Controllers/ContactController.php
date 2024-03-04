@@ -12,7 +12,11 @@ class ContactController extends Controller
 {
     public function show(): View
     {
-        return view('contact.add-contact');
+        $contact = new Contact();
+
+        return view('contact.add-contact', [
+            'contact' => $contact
+        ]);
     }
 
     public function create(ContactFormRequest $request): RedirectResponse
@@ -33,7 +37,7 @@ class ContactController extends Controller
         ]);
     }
 
-    public function read(string $id)
+    public function read(string $id): View
     {
         $contact = Contact::find($id);
 
@@ -42,20 +46,31 @@ class ContactController extends Controller
         ]);
     }
 
-    public function update()
+    public function edit(string $id): View
     {
+        $contact = Contact::find($id);
 
+        return view('contact.edit-contact', [
+           'contact' => $contact
+        ]);
     }
 
-    public function delete(string $id): View
+    public function update(string $id, ContactFormRequest $request): View
+    {
+        $contact = Contact::find($id);
+
+        $contact->update($request->validated());
+
+        return view('contact.view', [
+            'contact' => $contact
+        ]);
+    }
+
+    public function delete(string $id): RedirectResponse
     {
         Contact::where('id', '=', $id)->delete();
 
-        $contacts = Contact::all();
-
-        return view('contact.list-contact', [
-            'contacts' => $contacts
-        ]);
+        return redirect()->route('contact.list');
     }
 
     public function search(Request $request): View

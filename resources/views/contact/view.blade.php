@@ -12,6 +12,11 @@
             @if($contact)
                 <div class="card">
                     <div class="card-body">
+                        <a href="{{ route('contact.list') }}">
+                            <i class="material-icons">keyboard_backspace</i>
+                        </a>
+                    </div>
+                    <div class="card-body">
                         <h2 class="card-title">{{ $contact->firstName }} {{ $contact->name }}</h2>
                         <div>
                             <p>

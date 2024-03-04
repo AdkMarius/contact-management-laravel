@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ContactFormRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class ContactFormRequest extends FormRequest
         return [
             'name' => ['required', 'min:3'],
             'firstName' => ['required', 'min:3'],
-            'email' => ['required', 'email', 'unique:contacts'],
+            'email' => ['required', 'email', Rule::unique('contacts')->ignore($this->route()->parameter('id'))],
             'phoneNumber' => ['required', 'phone'],
             'birthDay' => ['date_format:Y-m-d']
         ];
